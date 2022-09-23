@@ -2,7 +2,7 @@
 template: overrides/main.html
 ---
 
-# Getting started
+# Getting started by hong
 
 Material for MkDocs is a theme for [MkDocs], a static site generator geared
 towards (technical) project documentation. If you're familiar with Python, you
