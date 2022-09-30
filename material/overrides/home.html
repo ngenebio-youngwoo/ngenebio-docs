@@ -144,9 +144,7 @@
         right: -350px;
         color: #fff;
         white-space: nowrap;
-        font-size: 7.5vw;
-
-        
+        font-size: 7.5vw;       
     }
 
     #moonbtn
@@ -159,7 +157,7 @@
         color: #2b1055;
         font-size:1.5em;
         z-index: 9;
-        transform: translateY(100px);
+        transform: translateY(250px);
     }
 
     /* Application header should be static for the landing page */
@@ -195,13 +193,39 @@
 
   <!-- Hero for landing page -->
   <section class="mdx-container">
-          <img src="overrides/assets/images/stars.png" id="starts">
-          <img src="overrides/assets/images/moon.png" id="moon">
-          <img src="overrides/assets/images/rocket.png" id="rocket">
-          <img src="overrides/assets/images/mountains_behind.png" id="mountains_behind" >
-          <h2 id="moontext">こんにちは 안녕 Hello</h2>
-          <a href="#sec" id="moonbtn">Explore </a>
-          <img src="overrides/assets/images/mountains_front.png" id="mountains_front">
+    <picture>
+      <source srcset="overrides/assets/images/stars.avif" type="image/avif" />
+      <source srcset="overrides/assets/images/stars.webp" type="image/webp" />
+      <img src="overrides/assets/images/stars.png" id="starts">
+    </picture>      
+
+    <picture>
+      <source srcset="overrides/assets/images/moon.avif" type="image/avif" />
+      <source srcset="overrides/assets/images/moon.webp" type="image/webp" />
+      <img src="overrides/assets/images/moon.png" id="moon">
+    </picture>  
+    
+    <picture>
+      <source srcset="overrides/assets/images/rocket.avif" type="image/avif" />
+      <source srcset="overrides/assets/images/rocket.webp" type="image/webp" />
+      <img src="overrides/assets/images/rocket.png" id="rocket">
+    </picture>
+
+    <picture>
+      <source srcset="overrides/assets/images/mountains_behind.avif" type="image/avif" />
+      <source srcset="overrides/assets/images/mountains_behind.webp" type="image/webp" />
+      <img src="overrides/assets/images/mountains_behind.png" id="mountains_behind">
+    </picture>
+
+    <h2 id="moontext">こんにちは 안녕 Hello</h2>
+    <a href="#sec" id="moonbtn">Explore </a>
+
+    <picture>
+      <source srcset="overrides/assets/images/mountains_front.avif" type="image/avif" />
+      <source srcset="overrides/assets/images/mountains_front.webp" type="image/webp" />
+      <img src="overrides/assets/images/mountains_front.png" id="mountains_front">
+    </picture>
+
   </section>
 
   <div class="sec">
