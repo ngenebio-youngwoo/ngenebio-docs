@@ -57,7 +57,8 @@ jobs:
         run: |
 
           pip install \
-            "mkdocs" \
+            "mkdocs-material" \
+            "mkdocs-material-extensions" \
             "cairosvg>=2.5" \
             "mkdocs-git-committers-plugin-2<1" \
             "mkdocs-git-revision-date-localized-plugin>=1.0" \
@@ -71,5 +72,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          mkdocs gh-deploy --force
+          mkdocs gh-deploy --force --clean --verbose
           mkdocs --version
