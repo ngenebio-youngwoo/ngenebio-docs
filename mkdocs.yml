@@ -19,24 +19,26 @@
 # IN THE SOFTWARE.
 
 # Project information
-site_name: Material for MkDocs
-site_url: https://squidfunk.github.io/mkdocs-material/
+site_name: Genomic Variant Database
+site_url: https://ngenebio.github.io/docs/
 site_author: Martin Donath
 site_description: >-
   Write your documentation in Markdown and create a professional static site
   in minutes – searchable, customizable, for all devices
 
 # Repository
-repo_name: squidfunk/mkdocs-material
-repo_url: https://github.com/squidfunk/mkdocs-material
+repo_name: ngenebio/docs
+repo_url: https://github.com/ngenebio/docs
 
 # Copyright
-copyright: Copyright &copy; 2016 - 2022 Martin Donath
+copyright: >
+  Copyright &copy; 2016 - 2022 Martin Donath –
+  <a href="#__consent">Change cookie settings</a>
 
 # Configuration
 theme:
-  name: null
-  custom_dir: !ENV [THEME_DIR, "mkdocs-material/material"]
+  name: material
+  custom_dir: !ENV [THEME_DIR, "material/overrides"]
 
   # Static files
   static_templates:
@@ -96,6 +98,8 @@ theme:
 
 # Plugins
 plugins:
+  - privacy:
+      enabled: !ENV [PRIVACY, true]
   - blog:
       blog_custom_dir: overrides
   - meta
@@ -129,14 +133,24 @@ plugins:
         - blog/archive/*
         - blog/category/*
   - git-committers:
-      repository: squidfunk/mkdocs-material
-      token: !!python/object/apply:os.getenv ["GH_TOKEN"]
-      branch: main
+      repository: ngenebio/docs
+      enabled: True
+      branch: master
   - minify:
       minify_html: !ENV [CI, false]
 
 # Customization
 extra:
+  consent:
+    title: Cookie consent
+    description: >- 
+      사용자 경험을 향상하기 위해, 쿠키를 수집, 사용하여 로그인 정보를 저장하고 보안 접속을 제공합니다. 
+      또한 통계 자료를 수집하여 기능을 최적화하고 방문 통계를 생성하여 개인의 관심 분야에 맞춰 콘텐츠를 조정합니다. 
+      쿠키 수집 및 이용에 동의하시는 경우, "동의 후 계속하기"를 클릭해주세요. 
+      이용자는 쿠키 수집 및 이용을 거부할 수 있고, 거부시 웹사이트 내 일부 서비스 이용이 어려울 수 있습니다.
+    cookies:
+      analytics: Google Analytics 
+      custom: Custom cookie
   status:
     new: Recently added
     deprecated: Deprecated
@@ -168,8 +182,13 @@ extra:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/squidfunk
 
+extra_javascript:
+  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
+  - javascripts/tablesort.js
+
 # Extensions
 markdown_extensions:
+  - tables
   - abbr
   - admonition
   - attr_list
@@ -211,13 +230,13 @@ markdown_extensions:
 # Page tree
 nav:
   - Home: index.md
-  - Getting started:
-    - Installation: getting-started.md
-    - Creating your site: creating-your-site.md
-    - Publishing your site: publishing-your-site.md
-    - Customization: customization.md
-    - Browser support: browser-support.md
-    - Philosophy: philosophy.md
+  - Getting started: 
+    - Variant annotation data: variant-annotation-data.md
+    - Data release notes: data-release-notes.md
+    - Variant query service: variant-query-service.md
+    - Variant annotation service: variant-annotation-service.md
+    - Server response: server-response.md
+    - Third-party packages: third-party-packages.md
     - Alternatives: alternatives.md
     - License: license.md
     - Changelog:
