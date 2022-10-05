@@ -205,11 +205,13 @@
       <img src="overrides/assets/images/moon.png" id="moon">
     </picture>  
     
+    <!--
     <picture>
       <source srcset="overrides/assets/images/rocket.avif" type="image/avif" />
       <source srcset="overrides/assets/images/rocket.webp" type="image/webp" />
       <img src="overrides/assets/images/rocket.png" id="rocket">
     </picture>
+    -->
 
     <picture>
       <source srcset="overrides/assets/images/mountains_behind.avif" type="image/avif" />
@@ -218,7 +220,7 @@
     </picture>
 
     <h2 id="moontext">こんにちは 안녕 Hello</h2>
-    <a href="#sec" id="moonbtn">Explore </a>
+    <a href="/docs/variant-annotation-data" id="moonbtn">Explore </a>
 
     <picture>
       <source srcset="overrides/assets/images/mountains_front.avif" type="image/avif" />
@@ -247,7 +249,7 @@
     let text = document.getElementById('moontext');
     let btn = document.getElementById('moonbtn');
     let mountains_front = document.getElementById('mountains_front');
-    let rocket = document.getElementById('rocket');
+    // let rocket = document.getElementById('rocket');
 
 
     window.addEventListener('scroll', function(){ 
@@ -262,7 +264,7 @@
         text.style.marginRight = value * 4 + 'px';
         text.style.marginTop = value * 1.5 + 'px';
         btn.style.marginTop = value * 1.5 + 'px';
-        rocket.style.top = value * 0.5 + 'px';
+        // rocket.style.top = value * 0.5 + 'px';
 
     });
 </script>

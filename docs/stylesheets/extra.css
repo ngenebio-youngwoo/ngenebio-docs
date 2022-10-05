@@ -1,10 +1,4 @@
-.md-grid {
-  #max-width: 100%; 
+html
+{
+  overflow-y: scroll;
 }
-
-html {
-    overflow-y: scroll;
-  }
-
-
-  
