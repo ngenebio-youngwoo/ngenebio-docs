@@ -1,90 +1,82 @@
 # Contributing
 
-When contributing to this repository, please first discuss the change you wish to make via issue,
-email, or any other method with the owners of this repository before making a change. 
+Interested in contributing to the Material for MkDocs? Want to report a bug?
+Have a question? Before you do, please read the following guidelines.
 
-Please note we have a code of conduct, please follow it in all your interactions with the project.
+## Submission context
 
-## Pull Request Process
+### Got a question or problem?
 
-1. Ensure any install or build dependencies are removed before the end of the layer when doing a 
-   build.
-2. Update the README.md with details of changes to the interface, this includes new environment 
-   variables, exposed ports, useful file locations and container parameters.
-3. Increase the version numbers in any relevant workflow files and the README.md to the new version that this
-   Pull Request would represent. When versioning is enabled, the scheme we use is [SemVer](http://semver.org/).
+For quick questions there's no need to open an issue as you can reach us on
+[gitter.im][1].
 
-## Code of Conduct
+  [1]: https://gitter.im/squidfunk/mkdocs-material
 
-### Our Pledge
+### Found a bug?
 
-In the interest of fostering an open and welcoming environment, we as
-contributors and maintainers pledge to making participation in our project and
-our community a harassment-free experience for everyone, regardless of age, body
-size, disability, ethnicity, gender identity and expression, level of experience,
-nationality, personal appearance, race, religion, or sexual identity and
-orientation.
+If you found a bug in the source code, you can help us by submitting an issue
+to the [issue tracker][2] in our GitHub repository. Even better, you can submit
+a Pull Request with a fix. However, before doing so, please read the
+[submission guidelines][3].
 
-### Our Standards
+  [2]: https://github.com/squidfunk/mkdocs-material/issues
+  [3]: #submission-guidelines
 
-Examples of behavior that contributes to creating a positive environment
-include:
+### Missing a feature?
 
-* Using welcoming and inclusive language
-* Being respectful of differing viewpoints and experiences
-* Gracefully accepting constructive criticism
-* Focusing on what is best for the community
-* Showing empathy towards other community members
+You can request a new feature by submitting an issue to our GitHub Repository.
+If you would like to implement a new feature, please submit an issue with a
+proposal for your work first, to be sure that it is of use for everyone, as
+Material for MkDocs is highly opinionated. Please consider what kind of change
+it is:
 
-Examples of unacceptable behavior by participants include:
+* For a **major feature**, first open an issue and outline your proposal so
+  that it can be discussed. This will also allow us to better coordinate our
+  efforts, prevent duplication of work, and help you to craft the change so
+  that it is successfully accepted into the project.
 
-* The use of sexualized language or imagery and unwelcome sexual attention or
-advances
-* Trolling, insulting/derogatory comments, and personal or political attacks
-* Public or private harassment
-* Publishing others' private information, such as a physical or electronic
-  address, without explicit permission
-* Other conduct which could reasonably be considered inappropriate in a
-  professional setting
+* **Small features and bugs** can be crafted and directly submitted as a Pull
+  Request. However, there is no guarantee that your feature will make it into
+  the `master`, as it's always a matter of opinion whether if benefits the
+  overall functionality of the project.
 
-### Our Responsibilities
+## Submission guidelines
 
-Project maintainers are responsible for clarifying the standards of acceptable
-behavior and are expected to take appropriate and fair corrective action in
-response to any instances of unacceptable behavior.
+### Submitting an issue
 
-Project maintainers have the right and responsibility to remove, edit, or
-reject comments, commits, code, wiki edits, issues, and other contributions
-that are not aligned to this Code of Conduct, or to ban temporarily or
-permanently any contributor for other behaviors that they deem inappropriate,
-threatening, offensive, or harmful.
+Before you submit an issue, please search the issue tracker, maybe an issue for
+your problem already exists and the discussion might inform you of workarounds
+readily available.
 
-### Scope
+We want to fix all the issues as soon as possible, but before fixing a bug we
+need to reproduce and confirm it. In order to reproduce bugs we will
+systematically ask you to provide a minimal reproduction scenario using the
+custom issue template. Please stick to the issue template.
 
-This Code of Conduct applies both within project spaces and in public spaces
-when an individual is representing the project or its community. Examples of
-representing a project or community include using an official project e-mail
-address, posting via an official social media account, or acting as an appointed
-representative at an online or offline event. Representation of a project may be
-further defined and clarified by project maintainers.
+Unfortunately we are not able to investigate / fix bugs without a minimal
+reproduction scenario, so if we don't hear back from you we may close the issue.
 
-### Enforcement
+### Submitting a Pull Request (PR)
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project team at [INSERT EMAIL ADDRESS]. All
-complaints will be reviewed and investigated and will result in a response that
-is deemed necessary and appropriate to the circumstances. The project team is
-obligated to maintain confidentiality with regard to the reporter of an incident.
-Further details of specific enforcement policies may be posted separately.
+Search GitHub for an open or closed PR that relates to your submission. You
+don't want to duplicate effort. If you do not find a related issue or PR,
+go ahead.
 
-Project maintainers who do not follow or enforce the Code of Conduct in good
-faith may face temporary or permanent repercussions as determined by other
-members of the project's leadership.
+1. **Development**: Fork the project, set up the [development environment][4],
+  make your changes in a separate git branch and add descriptive messages to
+  your commits.
 
-### Attribution
+2. **Build**: Before submitting a pull requests, [build the theme][5]. This is
+  a mandatory requirement for your PR to get accepted, as the theme should at
+  all times be installable through GitHub.
 
-This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4,
-available at [http://contributor-covenant.org/version/1/4][version]
+3. **Pull Request**: After building the theme, commit the compiled output, push
+  your branch to GitHub and send a PR to `mkdocs-material:master`. If we
+  suggest changes, make the required updates, rebase your branch and push the
+  changes to your GitHub repository, which will automatically update your PR.
 
-[homepage]: http://contributor-covenant.org
-[version]: http://contributor-covenant.org/version/1/4/
+After your PR is merged, you can safely delete your branch and pull the changes
+from the main (upstream) repository.
+
+  [4]: https://squidfunk.github.io/mkdocs-material/customization/#environment-setup
+  [5]: https://squidfunk.github.io/mkdocs-material/customization/#build-process

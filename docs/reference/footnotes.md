@@ -1,19 +1,22 @@
 ---
 template: overrides/main.html
-icon: material/format-align-bottom
 ---
 
 # Footnotes
 
-Footnotes are a great way to add supplemental or additional information to a
-specific word, phrase or sentence without interrupting the flow of a document.
-Material for MkDocs provides the ability to define, reference and render
-footnotes.
+Footnotes are a great way to add references to supplemental or additional
+information for a specific section of a document without interrupting the
+document flow. Material for MkDocs provides the ability to insert inline
+footnotes and render them at the bottom of the page.
 
 ## Configuration
 
-This configuration adds the ability to define inline footnotes, which are then
-rendered below all Markdown content of a document. Add the following lines to
+### Footnotes
+
+[:octicons-file-code-24: Source][1] · [:octicons-workflow-24: Extension][2]
+
+The [Footnotes][2] extension, which is part of the standard Markdown library,
+adds the ability to add inline footnotes to a document and can be enabled via
 `mkdocs.yml`:
 
 ``` yaml
@@ -21,11 +24,8 @@ markdown_extensions:
   - footnotes
 ```
 
-See additional configuration options:
-
-- [Footnotes]
-
-  [Footnotes]: ../setup/extensions/python-markdown.md#footnotes
+  [1]: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/stylesheets/main/extensions/markdown/_footnotes.scss
+  [2]: https://python-markdown.github.io/extensions/footnotes/
 
 ## Usage
 
@@ -35,15 +35,15 @@ A footnote reference must be enclosed in square brackets and must start with a
 caret `^`, directly followed by an arbitrary identifier, which is similar to
 the standard Markdown link syntax.
 
-``` title="Text with footnote references"
+_Example_:
+
+``` markdown
 Lorem ipsum[^1] dolor sit amet, consectetur adipiscing elit.[^2]
 ```
 
-<div class="result" markdown>
+_Result_:
 
 Lorem ipsum[^1] dolor sit amet, consectetur adipiscing elit.[^2]
-
-</div>
 
 ### Adding footnote content
 
@@ -54,38 +54,38 @@ reference is automatically added.
 
 #### on a single line
 
-Short footnotes can be written on the same line:
+Short statements can be written on the same line.
 
-``` title="Footnote"
+_Example_:
+
+``` markdown
 [^1]: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 ```
 
-<div class="result" markdown>
+_Result_:
 
-[:octicons-arrow-down-24: Jump to footnote](#fn:1)
-
-</div>
+[Jump to footnote at the bottom of the page](#fn:1)
 
   [^1]: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
 #### on multiple lines
 
-Paragraphs can be written on the next line and must be indented by four spaces:
+Paragraphs can be written on the next line and must be indented by four spaces.
 
-``` title="Footnote"
+_Example_:
+
+``` markdown
 [^2]:
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
     nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
     massa, nec semper lorem quam in massa.
 ```
 
-<div class="result" markdown>
+_Result_:
 
-[:octicons-arrow-down-24: Jump to footnote](#fn:2)
+  [^2]:
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+      nulla. Curabitur feugiat, tortor non consequat finibus, justo purus
+      auctor massa, nec semper lorem quam in massa.
 
-</div>
-
-[^2]:
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
-    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus
-    auctor massa, nec semper lorem quam in massa.
+[Jump to footnote at the bottom of the page](#fn:2)

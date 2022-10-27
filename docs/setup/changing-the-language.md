@@ -5,35 +5,26 @@ template: overrides/main.html
 # Changing the language
 
 Material for MkDocs supports internationalization (i18n) and provides
-translations for template variables and labels in 50+ languages. Additionally,
-the site search can be configured to use a language-specific stemmer, if
-available.
+translations for template variables and labels in 40+ languages. Additionally,
+the site search can be configured to use a language-specific stemmer (if
+available).
 
 ## Configuration
 
 ### Site language
 
-[:octicons-tag-24: 1.12.0][Site language support] ·
-:octicons-milestone-24: Default: `en`
+[:octicons-file-code-24: Source][1] · :octicons-milestone-24: Default: `en`
 
-You can set the site language in `mkdocs.yml` with:
+You can set the _site language_ in `mkdocs.yml` with:
 
 ``` yaml
 theme:
-  language: en # (1)!
+  language: en
 ```
-
-1.  HTML5 only allows to set a [single language per document], which is why
-    Material for MkDocs only supports setting a canonical language for the
-    entire project, i.e. one per `mkdocs.yml`.
-
-    The easiest way to build a multi-language documentation is to create one
-    project in a subfolder per language, and then use the [language selector]
-    to interlink those projects.
 
 The following languages are supported:
 
-<div class="mdx-columns" markdown>
+<div class="mdx-columns" markdown="1">
 
 - `af` – Afrikaans
 - `ar` – Arabic
@@ -43,7 +34,6 @@ The following languages are supported:
 - `cs` – Czech
 - `da` – Danish
 - `de` – German
-- `el` – Greek
 - `en` – English
 - `eo` – Esperanto
 - `es` – Spanish
@@ -52,29 +42,23 @@ The following languages are supported:
 - `fi` – Finnish
 - `fr` – French
 - `gl` – Galician
+- `gr` – Greek
 - `he` – Hebrew
 - `hi` – Hindi
 - `hr` – Croatian
 - `hu` – Hungarian
-- `hy` – Armenian
 - `id` – Indonesian
 - `is` – Icelandic
 - `it` – Italian
 - `ja` – Japanese
 - `ka` – Georgian
 - `kr` – Korean
-- `lt` – Lithuanian
-- `lv` – Latvian
-- `mk` – Macedonian
-- `mn` – Mongolian
-- `ms` – Bahasa Malaysia
 - `my` – Burmese
 - `nl` – Dutch
 - `nn` – Norwegian (Nynorsk)
 - `no` – Norwegian
 - `pl` – Polish
 - `pt` – Portuguese
-- `pt-BR` – Portuguese (Brasilian)
 - `ro` – Romanian
 - `ru` – Russian
 - `sh` – Serbo-Croatian
@@ -84,88 +68,80 @@ The following languages are supported:
 - `sr` – Serbian
 - `sv` – Swedish
 - `th` – Thai
-- `tl` – Tagalog
 - `tr` – Turkish
 - `uk` – Ukrainian
-- `ur` – Urdu
-- `uz` – Uzbek
 - `vi` – Vietnamese
 - `zh` – Chinese (Simplified)
 - `zh-Hant` – Chinese (Traditional)
 - `zh-TW` – Chinese (Taiwanese)
-- [Add language]
+- [Add language](https://bit.ly/38F5RCa)
 
 </div>
 
-Note that some languages will produce unreadable anchor links due to the way
-the default slug function works. Consider using a [Unicode-aware slug function].
+_Note that some languages will produce unreadable anchor links, due to the way
+the default slug function works. Consider using a Unicode-aware slug function,
+as [documented here][2]._
 
-  [Site language support]: https://github.com/squidfunk/mkdocs-material/releases/tag/1.12.0
-  [single language per document]: https://www.w3.org/International/questions/qa-html-language-declarations.en#attributes
-  [language selector]: #site-language-selector
-  [Unicode-aware slug function]: extensions/python-markdown.md#toc-slugify
-  [Add language]: https://github.com/squidfunk/mkdocs-material/issues/new?template=translate.yml&title=New+language%3A+%7Breplace+with+language+name%7D
+  [1]: https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/languages/en.html
+  [2]: setting-up-navigation.md#slugify
 
 ### Site language selector
 
-[:octicons-tag-24: 7.0.0][Site language selector support] ·
-:octicons-milestone-24: Default: _none_ ·
+[:octicons-file-code-24: Source][3] ·
 :octicons-beaker-24: Experimental
 
-If your documentation is available in multiple languages, a language selector
-pointing to those languages can be added to the header. Alternate languages
-can be defined via `mkdocs.yml`.
+If your documentation is available in multiple languages, a _language selector_
+can be added to the header next to the search bar. Alternate languages can be
+defined via `mkdocs.yml`:
 
 ``` yaml
 extra:
   alternate:
+
+    # Switch to English
     - name: English
-      link: /en/ # (1)!
+      link: <your-site>/en/
       lang: en
+
+    # Switch to German
     - name: Deutsch
-      link: /de/
+      link: <your-site>/de/
       lang: de
+
+    # Switch to Japanese
+    - name: 日本語
+      link: <your-site>/ja/
+      lang: ja
 ```
 
-1.  Note that this must be an absolute link. If it includes a domain part, it's
-    used as defined. Otherwise the domain part of the [`site_url`][site_url] as
-    set in `mkdocs.yml` is prepended to the link.
+This will render a language selector in the header next to the search bar:
 
-The following properties are available for each alternate language:
+[![Language selection][4]][4]
 
-[`name`](#+alternate.name){ #+alternate.name }
+  [3]: https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/header.html
+  [4]: ../assets/screenshots/language-selection.png
 
-:   :octicons-milestone-24: Default: _none_ · :octicons-alert-24: __Required__ –
-    This value of this property is used inside the language selector as the
-    name of the language and must be set to a non-empty string.
+### Site search language
 
-[`link`](#+alternate.link){ #+alternate.link }
+[:octicons-file-code-24: Source][5] ·
+:octicons-milestone-24: Default: _automatically set_
 
-:   :octicons-milestone-24: Default: _none_ · :octicons-alert-24: __Required__ –
-    This property must be set to an absolute link, which might also point to
-    another domain or subdomain not necessarily generated with MkDocs.
+Some languages, like Arabic or Japanese, need dedicated stemmers for search to
+work properly. Material for MkDocs relies on [lunr-languages][6] to provide this
+functionality. See the guide detailing how to [set up site search][7] for
+more information.
 
-[`lang`](#+alternate.lang){ #+alternate.lang }
-
-:   :octicons-milestone-24: Default: _none_ · :octicons-alert-24: __Required__ –
-    This property must contain an [ISO 639-1 language code] and is used for
-    the `hreflang` attribute of the link, improving discoverability via search
-    engines.
-
-[![Language selector preview]][Language selector preview]
-
-  [Site language selector support]: https://github.com/squidfunk/mkdocs-material/releases/tag/7.0.0
-  [site_url]: https://www.mkdocs.org/user-guide/configuration/#site_url
-  [ISO 639-1 language code]: https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
-  [Language selector preview]: ../assets/screenshots/language-selection.png
+  [5]: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/javascripts/integrations/search/worker/main/index.ts
+  [6]: https://github.com/MihaiValentin/lunr-languages
+  [7]: setting-up-site-search.md
 
 ### Directionality
 
-[:octicons-tag-24: 2.5.0][Directionality support] ·
+[:octicons-file-code-24: Source][8] ·
 :octicons-milestone-24: Default: _automatically set_
 
 While many languages are read `ltr` (left-to-right), Material for MkDocs also
-supports `rtl` (right-to-left) directionality which is deduced from the
+supports `rtl` (right-to-left) _directionality_ which is inferred from the
 selected language, but can also be set with:
 
 ``` yaml
@@ -186,55 +162,39 @@ Click on a tile to change the directionality:
     button.addEventListener("click", function() {
       var attr = this.getAttribute("data-md-dir")
       document.body.dir = attr
-      var name = document.querySelector("#__code_3 code span.l")
+      var name = document.querySelector("#__code_1 code span:nth-child(5)")
       name.textContent = attr
     })
   })
 </script>
 
-  [Directionality support]: https://github.com/squidfunk/mkdocs-material/releases/tag/2.5.0
+  [8]: https://github.com/squidfunk/mkdocs-material/blob/master/src/base.html
 
 ## Customization
 
 ### Custom translations
 
-If you want to customize some of the translations for a language, just follow
-the guide on [theme extension] and create a new partial in the `overrides`
-folder. Then, import the [translations] of the language as a fallback and only
-adjust the ones you want to override:
+[:octicons-file-code-24: Source][1] ·
+:octicons-mortar-board-24: Difficulty: _easy_
 
-=== ":octicons-file-code-16: `overrides/partials/languages/custom.html`"
+If you want to customize some of the translations for your language, just follow
+the guide on [theme extension][9] and create a new partial in
+`partials/languages`, e.g. `en-custom.html`. Next, look up the translation you
+want to change in the [base translation][1] and add it to the partial.
 
-    ``` html
-    <!-- Import translations for language and fallback -->
-    {% import "partials/languages/de.html" as language %}
-    {% import "partials/languages/en.html" as fallback %} <!-- (1)! -->
+Let's say you want to change "__Table of contents__" to "__On this page__":
 
-    <!-- Define custom translations -->
-    {% macro override(key) %}{{ {
-      "source.file.date.created": "Erstellt am", <!-- (2)! -->
-      "source.file.date.updated": "Aktualisiert am"
-    }[key] }}{% endmacro %}
+``` html
+{% macro t(key) %}{{ {
+  "toc.title": "On this page"
+}[key] }}{% endmacro %}
+```
 
-    <!-- Re-export translations -->
-    {% macro t(key) %}{{
-      override(key) or language.t(key) or fallback.t(key)
-    }}{% endmacro %}
-    ```
+Then, add the following lines to `mkdocs.yml`:
 
-    1.  Note that `en` must always be used as a fallback language, as it's the
-        default theme language.
+``` yaml
+theme:
+  language: en-custom
+```
 
-    2.  Check the [list of available languages], pick the translation you want
-        to override for your language and add them here.
-
-=== ":octicons-file-code-16: `mkdocs.yml`"
-
-    ``` yaml
-    theme:
-      language: custom
-    ```
-
-  [theme extension]: ../customization.md#extending-the-theme
-  [translations]: https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/languages/
-  [list of available languages]: https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/languages/
+  [9]: ../customization.md#extending-the-theme

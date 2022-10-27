@@ -10,15 +10,15 @@ makes this ridiculously simple.
 
 ## GitHub Pages
 
-If you're already hosting your code on GitHub, [GitHub Pages] is certainly
+If you're already hosting your code on GitHub, [GitHub Pages][1] is certainly
 the most convenient way to publish your project documentation. It's free of
 charge and pretty easy to set up.
 
-  [GitHub Pages]: https://pages.github.com/
+  [1]: https://pages.github.com/
 
 ### with GitHub Actions
 
-Using [GitHub Actions] you can automate the deployment of your project
+Using [GitHub Actions][2] you can automate the deployment of your project
 documentation. At the root of your repository, create a new GitHub Actions
 workflow, e.g. `.github/workflows/ci.yml`, and copy and paste the following
 contents:
@@ -26,11 +26,11 @@ contents:
 === "Material for MkDocs"
 
     ``` yaml
-    name: ci # (1)!
+    name: ci
     on:
       push:
         branches:
-          - master # (2)!
+          - master
           - main
     jobs:
       deploy:
@@ -40,24 +40,9 @@ contents:
           - uses: actions/setup-python@v2
             with:
               python-version: 3.x
-          - run: pip install mkdocs-material # (3)!
+          - run: pip install mkdocs-material
           - run: mkdocs gh-deploy --force
     ```
-
-    1.  You can change the name to your liking. 
-
-    2.  At some point, GitHub renamed `master` to `main`. If your default branch
-        is named `master`, you can safely remove `main`, vice versa.
-
-    3.  This is the place to install further [MkDocs plugins] or Markdown
-        extensions with `pip` to be used during the build:
-
-        ``` sh
-        pip install \
-          mkdocs-material \
-          mkdocs-awesome-pages-plugin \
-          ...
-        ```
 
 === "Insiders"
 
@@ -80,29 +65,23 @@ contents:
           - run: pip install git+https://${GH_TOKEN}@github.com/squidfunk/mkdocs-material-insiders.git
           - run: mkdocs gh-deploy --force
     env:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }} # (1)!
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
     ```
-
-    1.  Remember to set the `GH_TOKEN` environment variable to the value of your
-        [personal access token] when deploying [Insiders], which can be done
-        using [GitHub secrets].
 
 Now, when a new commit is pushed to either the `master` or `main` branches,
 the static site is automatically built and deployed. Push your changes to see
 the workflow in action.
 
-If the GitHub Page doesn't show up after a few minutes, go to the settings of
-your repository and ensure that the [publishing source branch] for your GitHub
-Page is set to `gh-pages`.
-
 Your documentation should shortly appear at `<username>.github.io/<repository>`.
 
-  [GitHub Actions]: https://github.com/features/actions
-  [MkDocs plugins]: https://github.com/mkdocs/mkdocs/wiki/MkDocs-Plugins
-  [personal access token]: https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
-  [Insiders]: insiders/index.md
-  [GitHub secrets]: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
-  [publishing source branch]: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
+_Remember to set the_ `GH_TOKEN` _environment variable to the value of your
+[personal access token][3] when deploying [Insiders][4], which can be done
+using [secrets][5]._
+
+  [2]: https://github.com/features/actions
+  [3]: https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
+  [4]: insiders/index.md
+  [5]: https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
 
 ### with MkDocs
 
@@ -115,10 +94,10 @@ mkdocs gh-deploy --force
 
 ## GitLab Pages
 
-If you're hosting your code on GitLab, deploying to [GitLab Pages] can be done
-by using the [GitLab CI] task runner. At the root of your repository, create a
-task definition named `.gitlab-ci.yml` and copy and paste the following
-contents:
+If you're hosting your code on GitLab, deploying to [GitLab Pages][6] can be
+done by using the [GitLab CI][7] task runner. At the root of your repository,
+create a task definition named `.gitlab-ci.yml` and copy and paste the
+following contents:
 
 === "Material for MkDocs"
 
@@ -127,8 +106,7 @@ contents:
     pages:
       stage: deploy
       only:
-        - master # (1)!
-        - main
+        - master
       script:
         - pip install mkdocs-material
         - mkdocs build --site-dir public
@@ -136,9 +114,6 @@ contents:
         paths:
           - public
     ```
-
-    1.  At some point, GitLab renamed `master` to `main`. If your default branch
-        is named `master`, you can safely remove `main`, vice versa.
 
 === "Insiders"
 
@@ -148,8 +123,7 @@ contents:
       stage: deploy
       only:
         - master
-        - main
-      script: # (1)!
+      script:
         - pip install git+https://${GH_TOKEN}@github.com/squidfunk/mkdocs-material-insiders.git
         - mkdocs build --site-dir public
       artifacts:
@@ -157,16 +131,16 @@ contents:
           - public
     ```
 
-    1.  Remember to set the `GH_TOKEN` environment variable to the value of your
-        [personal access token] when deploying [Insiders], which can be done
-        using [masked custom variables].
-
 Now, when a new commit is pushed to `master`, the static site is automatically
 built and deployed. Commit and push the file to your repository to see the
 workflow in action.
 
 Your documentation should shortly appear at `<username>.gitlab.io/<repository>`.
 
-  [GitLab Pages]: https://gitlab.com/pages
-  [GitLab CI]: https://docs.gitlab.com/ee/ci/
-  [masked custom variables]: https://docs.gitlab.com/ee/ci/variables/#create-a-custom-variable-in-the-ui
+_Remember to set the_ `GH_TOKEN` _environment variable to the value of your
+[personal access token][3] when deploying [Insiders][4], which can be done
+using [masked custom variables][8]._
+
+  [6]: https://gitlab.com/pages
+  [7]: https://docs.gitlab.com/ee/ci/
+  [8]: https://docs.gitlab.com/ee/ci/variables/#create-a-custom-variable-in-the-ui

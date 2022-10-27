@@ -1,4 +1,4 @@
-# Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+# Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to
@@ -19,26 +19,26 @@
 # IN THE SOFTWARE.
 
 # Project information
-site_name: Genomic Variant Database
+site_name: Reference
 site_url: https://ngenebio.github.io/docs/
-site_author: Martin Donath
+site_author: hongiiv
 site_description: >-
-  Write your documentation in Markdown and create a professional static site
-  in minutes – searchable, customizable, for all devices
+  Create a branded static site from a set of Markdown files to host the
+  documentation of your Open Source or commercial project – customizable,
+  searchable, mobile-friendly, 40+ languages
 
 # Repository
 repo_name: ngenebio/docs
 repo_url: https://github.com/ngenebio/docs
+edit_uri: ""
 
 # Copyright
-copyright: >
-  Copyright &copy; 2016 - 2022 Martin Donath –
-  <a href="#__consent">Change cookie settings</a>
+copyright: Copyright &copy; 2016 - 2021 NGENEBIO
 
 # Configuration
 theme:
   name: material
-  custom_dir: !ENV [THEME_DIR, "material"]
+  custom_dir: material
 
   # Static files
   static_templates:
@@ -51,127 +51,79 @@ theme:
   # Default values, taken from mkdocs_theme.yml
   language: en
   features:
-    - announce.dismiss
-    - content.code.annotate
-    # - content.tabs.link
-    - content.tooltips
-    # - header.autohide
-    # - navigation.expand
-    - navigation.indexes
     # - navigation.instant
-    # - navigation.prune
     - navigation.sections
     - navigation.tabs
-    # - navigation.tabs.sticky
+    - navigation.sticky
     - navigation.top
-    - navigation.tracking
-    - search.highlight
-    - search.share
-    - search.suggest
-    - toc.follow
-    # - toc.integrate
   palette:
-    - media: "(prefers-color-scheme)"
+    - scheme: default
+      primary: lime
+      accent: lime
       toggle:
-        icon: material/brightness-auto
-        name: Switch to light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-7
+        icon: material/toggle-switch-off-outline
         name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: indigo
-      accent: indigo
+    - scheme: slate
+      primary: red
+      accent: red
       toggle:
-        icon: material/brightness-4
-        name: Switch to system preference
+        icon: material/toggle-switch
+        name: Switch to light mode
   font:
-    text: Noto Sans Korean
-    code: Nanum Gothic Coding
-  favicon: assets/favicon.png
-  icon:
-    logo: logo
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/images/favicon.ico
+  logo: assets/images/neos-brands.svg
 
-# Plugins
 plugins:
-  - privacy:
-      enabled: !ENV [PRIVACY, true]
-  - blog:
-      blog_custom_dir: overrides
-  - meta
-  - rss:
-      match_path: blog/posts/.*
-      date_from_meta:
-        as_creation: date
-      categories:
-        - categories
-        - tags
-  - search:
-      separator: '[\s\u200b\-,:!=\[\]()"/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
-  - social
+  - extra-sass
+  - search
   - redirects:
       redirect_maps:
-        blog/2022/chinese-search-support.md: blog/posts/chinese-search-support.md
-        blog/2021/the-past-present-and-future.md: blog/posts/the-past-present-and-future.md
-        blog/2021/excluding-content-from-search.md: blog/posts/excluding-content-from-search.md
-        blog/2021/search-better-faster-smaller.md: blog/posts/search-better-faster-smaller.md
         changelog/insiders.md: insiders/changelog.md
-        conventions.md: philosophy.md
-        reference/abbreviations.md: reference/tooltips.md
-        reference/meta-tags.md: reference/index.md
-        reference/variables.md: https://mkdocs-macros-plugin.readthedocs.io/
+        extensions/admonition.md: reference/admonitions.md
+        extensions/codehilite.md: reference/code-blocks.md
+        extensions/footnotes.md: reference/footnotes.md
+        extensions/metadata.md: reference/meta-tags.md
+        extensions/permalinks.md: setup/setting-up-navigation.md #permalink
+        extensions/pymdown.md: reference/admonitions.md
+        plugins/revision-date.md: setup/adding-a-git-repository.md #revision-date
+        plugins/search.md: setup/setting-up-site-search.md
+        releases/4.md: upgrading.md #upgrading-from-4x-to-5x
+        releases/5.md: upgrading.md #upgrading-from-3x-to-4x
+        releases/changelog.md: changelog.md
+        setup/adding-social-links.md: setup/setting-up-the-footer.md
         sponsorship.md: insiders/index.md
-        upgrading.md: upgrade.md
-  - git-revision-date-localized:
-      enable_creation_date: true
-      type: timeago
-      exclude:
-        - blog/archive/*
-        - blog/category/*
-  - git-committers:
-      repository: ngenebio/docs
-      enabled: True
-      branch: master
   - minify:
-      minify_html: !ENV [CI, false]
+      minify_html: true
+  - extra-sass
+  - with-pdf:
+      #cover_title:
+      cover_subtitle: Technical documentation that just works
+      custom_template_path: cover
+      cover_logo: assets/images/book-cover.webp
+      back_cover: true
+      toc_level: 2
+      excludes_children:
+        - 'releases/changelog/:upgrading'
+        - 'blog'
+      convert_iframe:
+        - src: https://streamable.com/e/zmtb00
+          img: https://cdn-cf-east.streamable.com/image/zmtb00-screenshot75403.jpg
+      two_columns_level: 3
+      #render_js: true
+      #headless_chrome_path: google-chrome
+      #output_path: ../document.pdf
+      debug_html: true
+      verbose: true
+      show_anchors: true
+      enabled_if_env: ENABLE_PDF_EXPORT
+      
+
+#use_directory_urls: false
 
 # Customization
 extra:
-  version:
-    provider: mike
-  consent:
-    title: Cookie consent
-    description: >- 
-      사용자 경험을 향상하기 위해, 쿠키를 수집, 사용하여 로그인 정보를 저장하고 보안 접속을 제공합니다. 
-      또한 통계 자료를 수집하여 기능을 최적화하고 방문 통계를 생성하여 개인의 관심 분야에 맞춰 콘텐츠를 조정합니다. 
-      쿠키 수집 및 이용에 동의하시는 경우, "동의 후 계속하기"를 클릭해주세요. 
-      이용자는 쿠키 수집 및 이용을 거부할 수 있고, 거부시 웹사이트 내 일부 서비스 이용이 어려울 수 있습니다.
-    cookies:
-      analytics: Google Analytics 
-      custom: Custom cookie
-  status:
-    new: Recently added
-    deprecated: Deprecated
-  analytics:
-    provider: google
-    property: !ENV GOOGLE_ANALYTICS_KEY
-    feedback:
-      title: Was this page helpful?
-      ratings:
-        - icon: material/emoticon-happy-outline
-          name: This page was helpful
-          data: 1
-          note: Thanks for your feedback!
-        - icon: material/emoticon-sad-outline
-          name: This page could be improved
-          data: 0
-          note: >-
-            Thanks for your feedback! Help us improve this page by
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8L5YDggZiVjgvBKfv-XCdbQAEJrseRh8MBh-jS92TU2aqzw/viewform?usp=pp_url&entry.853143515={url}" target=_blank>telling us what you're missing</a>.
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/squidfunk
@@ -179,23 +131,21 @@ extra:
       link: https://gitter.im/squidfunk/mkdocs-material
     - icon: fontawesome/brands/docker
       link: https://hub.docker.com/r/squidfunk/mkdocs-material/
-    - icon: fontawesome/brands/python
-      link: https://pypi.org/project/mkdocs-material/
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/squidfunk
-
-extra_javascript:
-  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
-  - javascripts/tablesort.js
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/squidfunk/
+    - icon: fontawesome/brands/instagram
+      link: https://instagram.com/squidfunk
 
 # Extensions
 markdown_extensions:
-  - tables
-  - abbr
   - admonition
+  - abbr
   - attr_list
   - def_list
   - footnotes
+  - meta
   - md_in_html
   - toc:
       permalink: true
@@ -204,12 +154,12 @@ markdown_extensions:
   - pymdownx.betterem:
       smart_enable: all
   - pymdownx.caret
+  - pymdownx.critic
   - pymdownx.details
   - pymdownx.emoji:
-      emoji_generator: !!python/name:materialx.emoji.to_svg
       emoji_index: !!python/name:materialx.emoji.twemoji
-  - pymdownx.highlight:
-      anchor_linenums: true
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.keys
   - pymdownx.magiclink:
@@ -223,8 +173,7 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-  - pymdownx.tabbed:
-      alternate_style: true
+  - pymdownx.tabbed
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
@@ -232,41 +181,66 @@ markdown_extensions:
 # Page tree
 nav:
   - Home: index.md
-  - Documentation: 
-    - variant-annotation-data.md
-    - Variant query service: variant-query-service.md
-    - Variant annotation service: variant-annotation-service.md
-    - Server response: server-response.md
-    - License: license.md
+  - Precision Medicine:
+    - 정밀의료: getting-started.md
+    - NGS와 진단: ngs-clinical.md
+  - Setup:
+    - 시스템 요구사항: setup/overview.md
+    - 체크 리스트: setup/check-list.md
+    - 리눅스에 서버 설치: setup/install.md
+    - 클라이언트 설치: setup/client.md
+  - Manual:
+    - 패널: manual/oncoaccupanel/brcaaccutest.md
+    - 로그인: manual/oncoaccupanel/overview.md
+    - 신규분석요청: manual/oncoaccupanel/request.md
+    - 분석 결과: manual/oncoaccupanel/result.md
+    - 리포트: manual/oncoaccupanel/report.md
+    - 리뷰: manual/oncoaccupanel/review.md
+    - 부록:
+      - Cancer type: manual/oncoaccupanel/cancer-type.md
     - Changelog:
-      - changelog/index.md
-      - How to upgrade: upgrade.md
+      - v1.5.2: changelog/v1_5_2_0.md
+      - v1.5.1: changelog/v1_5_1_0.md
+      - v1.5.0: changelog/v1_5_0_0.md
+      - v1.4.4: changelog/v1_4_4_0.md
+      - v1.4.3: changelog/v1_4_3_0.md
+      - v1.4.2: changelog/v1_4_2_0.md
+      - v1.4.1: changelog/v1_4_1_0.md
+      - v1.4.0: changelog/v1_4_0_0.md
+      - v1.3.0: changelog/v1_3_3_0.md
+      - v1.2.0: changelog/v1_2_0_0.md
+  - FDA 문서:
+    - General information: foundation/general-information.md
+    - Indications for use: foundation/indications-for-use.md
+    - Contraindications: foundation/contraindications.md
+    - Warnings and precautions: foundation/warnings-adn-precautions.md
+    - Device description: foundation/device-description.md
+    - Alternative practices and procedures: foundation/alternative-practices-and-procedures.md
+    - Marketing history: foundation/marketing-history.md
+    - Potential Adverse Effects: foundation/potential-adverse-effects.md
+    - Nonclinical studies: foundation/nonclinical-studies.md
+    - Clinical Study: foundation/clinical-study.md
+    - Panel meeting recommendation: foundation/panel-meeting-recommendation.md
+    - Preclinical and clinical studies: foundation/preclinical-and-clinical-studies.md
+    - CDRH decision: foundation/cdrh-decision.md
+    - Approval Specifications: foundation/approval-specifications.md
+    - Reference: foundation/reference.md
   # - Setup:
   #   - Changing the colors: setup/changing-the-colors.md
   #   - Changing the fonts: setup/changing-the-fonts.md
   #   - Changing the language: setup/changing-the-language.md
   #   - Changing the logo and icons: setup/changing-the-logo-and-icons.md
-  #   - Ensuring data privacy: setup/ensuring-data-privacy.md
   #   - Setting up navigation: setup/setting-up-navigation.md
   #   - Setting up site search: setup/setting-up-site-search.md
   #   - Setting up site analytics: setup/setting-up-site-analytics.md
-  #   - Setting up social cards: setup/setting-up-social-cards.md
-  #   - Setting up a blog: setup/setting-up-a-blog.md
-  #   - Setting up tags: setup/setting-up-tags.md
   #   - Setting up versioning: setup/setting-up-versioning.md
   #   - Setting up the header: setup/setting-up-the-header.md
   #   - Setting up the footer: setup/setting-up-the-footer.md
   #   - Adding a git repository: setup/adding-a-git-repository.md
   #   - Adding a comment system: setup/adding-a-comment-system.md
-  #   - Building for offline usage: setup/building-for-offline-usage.md
-  #   - Extensions:
-  #     - setup/extensions/index.md
-  #     - Python Markdown: setup/extensions/python-markdown.md
-  #     - Python Markdown Extensions: setup/extensions/python-markdown-extensions.md
   # - Reference:
-  #   - reference/index.md
+  #   - Abbreviations: reference/abbreviations.md
   #   - Admonitions: reference/admonitions.md
-  #   - Annotations: reference/annotations.md
   #   - Buttons: reference/buttons.md
   #   - Code blocks: reference/code-blocks.md
   #   - Content tabs: reference/content-tabs.md
@@ -274,19 +248,22 @@ nav:
   #   - Diagrams: reference/diagrams.md
   #   - Footnotes: reference/footnotes.md
   #   - Formatting: reference/formatting.md
-  #   - Grids: reference/grids.md
-  #   - Icons, Emojis: reference/icons-emojis.md
+  #   - Icons + Emojis: reference/icons-emojis.md
   #   - Images: reference/images.md
   #   - Lists: reference/lists.md
   #   - MathJax: reference/mathjax.md
-  #   - Tooltips: reference/tooltips.md
+  #   - Meta tags: reference/meta-tags.md
+  #   - Variables: reference/variables.md
   # - Insiders:
-  #   - insiders/index.md
+  #   - Sponsorship: insiders/index.md
   #   - Getting started:
   #     - Installation: insiders/getting-started.md
   #     - Changelog: insiders/changelog.md
-  - Blog:
-    - blog/index.md
+
+# Google Analytics
+google_analytics:
+  - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
+  - auto
 
 extra_css:
   - stylesheets/extra.css

@@ -6,21 +6,21 @@ template: overrides/main.html
 
 Material for MkDocs makes it easy to deploy multiple versions of your project
 documentation by integrating with external utilities that add those capabilities
-to MkDocs, i.e. [mike]. When deploying a new version, older versions of your
+to MkDocs, i.e. [mike][1]. When deploying a new version, older versions of your
 documentation remain untouched.
 
-  [mike]: https://github.com/jimporter/mike
+  [1]: https://github.com/jimporter/mike
 
 ## Configuration
 
 ### Versioning
 
-[:octicons-tag-24: 7.0.0][Versioning support] ·
-[:octicons-package-24: Utility][mike]
+[:octicons-file-code-24: Source][2] ·
+[:octicons-package-24: Utility][1]
 
-[mike] makes it easy to deploy multiple versions of your project documentation.
-It integrates natively with Material for MkDocs and can be enabled via
-`mkdocs.yml`:
+[mike][1] makes it easy to deploy multiple versions of your project
+documentation. It integrates natively with Material for MkDocs and can be
+enabled via `mkdocs.yml`:
 
 ``` yaml
 extra:
@@ -28,21 +28,22 @@ extra:
     provider: mike
 ```
 
-This renders a version selector in the header:
+This will render a version selector in the header next to the title of your
+project:
 
-<figure markdown>
+<figure markdown="1">
 
-[![Version selector preview]][Version selector preview]
+[![Version selection][3]][3]
 
-  <figcaption markdown>
+  <figcaption markdown="1">
 
-Check out the versioning example to see it in action –
-[squidfunk.github.io/mkdocs-material-example-versioning][version example]
+A demo is worth a thousand words — check it out at
+[squidfunk.github.io/mkdocs-material-example-versioning][4]
 
   </figcaption>
 </figure>
 
-!!! quote "[Why use mike?]"
+!!! quote "[Why use mike?][5]"
 
     mike is built around the idea that once you've generated your docs for a
     particular version, you should never need to touch that version again. This
@@ -55,44 +56,41 @@ Check out the versioning example to see it in action –
     to particularly notable versions. This makes it easy to make permalinks to
     whatever version of the documentation you want to direct people to.
 
-  [Versioning support]: https://github.com/squidfunk/mkdocs-material/releases/tag/7.0.0
-  [Version selector preview]: ../assets/screenshots/versioning.png
-  [version example]: https://squidfunk.github.io/mkdocs-material-example-versioning/
-  [Why use mike?]: https://github.com/jimporter/mike#why-use-mike
+_Note that you don't need to run_ `mike install-extras` _as noted in the
+[official documentation][6], as [mike][1] is now natively integrated with
+Material for MkDocs._
+
+  [2]: https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/header.html
+  [3]: ../assets/screenshots/versioning.png
+  [4]: https://squidfunk.github.io/mkdocs-material-example-versioning/
+  [5]: https://github.com/jimporter/mike#why-use-mike
+  [6]: https://github.com/jimporter/mike#usage
 
 ### Version warning
 
-[:octicons-tag-24: 8.0.0][Version warning support] ·
-:octicons-file-symlink-file-24: Customization
+[:octicons-file-code-24: Source][7] ·
+[:octicons-heart-fill-24:{ .mdx-heart } Insiders only][7]{ .mdx-insiders }
 
 If you're using versioning, you might want to display a warning when the user
-visits any other version than the latest version. Using [theme extension],
-you can [override the `outdated` block][overriding blocks]:
+visits any other version than the latest version. Using [theme extension][8],
+you can [define the `outdated` block][9]:
 
 ``` html
-{% extends "base.html" %}
-
 {% block outdated %}
   You're not viewing the latest version.
-  <a href="{{ '../' ~ base_url }}"> <!-- (1)! -->
-    <strong>Click here to go to latest.</strong>
+  <a href="{{ config.site_url | url }}">
+    Click here to go to latest.
   </a>
 {% endblock %}
 ```
 
-1.  Given this value for the `href` attribute, the link will always redirect to 
-    the root of your site, which will then redirect to the latest version. This
-    ensures that older versions of your site do not depend on a specific alias,
-    e.g. `latest`, to allow for changing the alias later on without breaking
-    earlier versions.
-
 This will render a version warning above the header:
 
-[![Version warning preview]][Version warning preview]
+[![Version warning][10]][10]
 
-The default version is identified by the `latest` alias. If you wish to set
-another alias as the latest version, e.g. `stable`, add the following lines
-to `mkdocs.yml`:
+By default, the default version is identified by the `latest` alias. If you
+wish to set another alias as the latest version, e.g. `stable`, add the
+following to `mkdocs.yml`:
 
 ``` yaml
 extra:
@@ -100,19 +98,19 @@ extra:
     default: stable
 ```
 
-Make sure that this matches the [default version].
+Make sure that this matches the [default version][11].
 
-  [Version warning support]: https://github.com/squidfunk/mkdocs-material/releases/tag/8.0.0
-  [theme extension]: ../customization.md#extending-the-theme
-  [overriding blocks]: ../customization.md#overriding-blocks
-  [Version warning preview]: ../assets/screenshots/version-warning.png
-  [default version]: #setting-a-default-version
+  [7]: ../insiders/index.md
+  [8]: ../customization.md#extending-the-theme
+  [9]: ../customization.md#overriding-blocks
+  [10]: ../assets/screenshots/version-warning.png
+  [11]: #setting-a-default-version
 
 ## Usage
 
 While this section outlines the basic workflow for publishing new versions, 
-it's best to check out [mike's documentation][mike] to make yourself familar
-with its mechanics.
+it's best to check out the [official documentation][6] to make yourself familar
+with [mike][1].
 
 ### Publishing a new version
 
@@ -126,21 +124,21 @@ mike deploy --push --update-aliases 0.1 latest
 Note that every version will be deployed as a subdirectory of your `site_url`,
 e.g.:
 
-- _docs.example.com/0.1/_
-- _docs.example.com/0.2/_
+- _docs.example.com/0.1_
+- _docs.example.com/0.2_
 - ...
 
 ### Setting a default version
 
-When starting with [mike], a good idea is to set an alias as a default version,
-e.g. `latest`, and when publishing a new version, always update the alias to
-point to the latest version:
+When starting with [mike][1], a good idea is to set an alias as a default
+version, e.g. `latest`, and when publishing a new version, always update the
+alias to point to the latest version:
 
 ```
 mike set-default --push latest
 ```
 
-When publishing a new version, [mike] will create a redirect in the root of
+When publishing a new version, [mike][1] will create a redirect in the root of
 your project documentation to the version associated with the alias:
 
 _docs.example.com_ :octicons-arrow-right-24: _docs.example.com/0.1_

@@ -1,234 +1,281 @@
 ---
 template: overrides/main.html
-icon: material/code-json
 ---
 
 # Code blocks
 
 Code blocks and examples are an essential part of technical project
 documentation. Material for MkDocs provides different ways to set up syntax
-highlighting for code blocks, either during build time using [Pygments] or
+highlighting for code blocks, either during build time using [Pygments][1] or
 during runtime using a JavaScript syntax highlighter.
 
-  [Pygments]: https://pygments.org
+  [1]: https://pygments.org
 
 ## Configuration
 
-This configuration enables syntax highlighting on code blocks and inline code 
-blocks, and allows to include source code directly from other files. Add the 
-following lines to `mkdocs.yml`:
+### Highlight
+
+[:octicons-file-code-24: Source][2] · [:octicons-workflow-24: Extension][3] ·
+:octicons-zap-24: Supersedes: [CodeHilite][4]
+
+The [Highlight][3] extension, which is part of [Python Markdown Extensions][5],
+integrates with Material for MkDocs and provides several options for
+configuring syntax highlighting of code blocks:
+
+`use_pygments`{ #use-pygments }
+
+:   :octicons-milestone-24: Default: `true` – This option allows to control
+    whether highlighting should be carried out during build time by
+    [Pygments][1] or runtime with a JavaScript highlighter. Remember to add the
+    necessary  [additional stylesheets][6] and [JavaScript][7] if you want to
+    use the latter:
+
+    === "Pygments"
+
+        ``` yaml
+        markdown_extensions:
+          - pymdownx.highlight
+          - pymdownx.superfences
+        ```
+
+    === "JavaScript"
+
+        ``` yaml
+        markdown_extensions:
+          - pymdownx.highlight:
+              use_pygments: false
+        ```
+
+    ??? example "Syntax highlighting with Highlight.js"
+
+        [Highlight.js][8] can be integrated by creating an [additional
+        JavaScript][7] file initializing the highlighter and including the 
+        respective stylesheet and JavaScript from a [CDN][9] serving
+        Highlight.js in `mkdocs.yml`:
+
+        === "docs/javascripts/config.js"
+
+            ``` js
+            hljs.initHighlighting()
+            ```
+
+        === "mkdocs.yml"
+
+            ``` yaml
+            extra_javascript:
+              - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js
+              - javascripts/config.js
+            extra_css:
+              - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css
+            ```
+
+        Note that Highlight.js has no affiliation with the Highlight extension.
+
+`linenums`{ #linenums }
+
+:   :octicons-milestone-24: Default: `false` – This option will add line numbers
+    to _all_ code blocks. If you wish to add line numbers to _some_, but not all
+    code blocks, consult the section on [adding line numbers][10] later in this
+    document, which also contains some tips on working with line numbers:
+
+    ``` yaml
+    markdown_extensions:
+      - pymdownx.highlight:
+          linenums: true
+    ```
+
+`linenums_style`{ #linenums-style }
+
+:   :octicons-milestone-24: Default: `table` – The Highlight extension provides
+    three ways to add line numbers, all of which are supported by Material for
+    MkDocs. While `table` wraps a code block in a table, `inline` and
+    `pymdownx.inline` render line numbers as part of the line itself:
+
+    ``` yaml
+    markdown_extensions:
+      - pymdownx.highlight:
+          linenums_style: pymdownx.inline
+    ```
+
+    Note that `inline` will put line numbers next to the actual code, which
+    means that they will be included when selecting text with the cursor or 
+    copying a code block to the clipboard. Thus, the usage of `table` or
+    `pymdownx.inline` is recommended.
+
+_Material for MkDocs doesn't provide official support for the other options of
+this extension, so they may be supported but might yield unexpected results.
+Use them at your own risk._
+
+  [2]: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/stylesheets/main/extensions/pymdownx/_highlight.scss
+  [3]: https://facelessuser.github.io/pymdown-extensions/extensions/highlight/
+  [4]: https://python-markdown.github.io/extensions/code_hilite/
+  [5]: https://facelessuser.github.io/pymdown-extensions/
+  [6]: ../customization.md#additional-css
+  [7]: ../customization.md#additional-javascript
+  [8]: https://highlightjs.org/
+  [9]: https://cdnjs.com/libraries/highlight.js/
+  [10]: #adding-line-numbers
+
+### InlineHilite
+
+[:octicons-file-code-24: Source][2] · [:octicons-workflow-24: Extension][11]
+
+The [InlineHilite][11] extension, which is part of [Python Markdown 
+Extensions][5] also integrates with Material for MkDocs and adds support for
+__syntax highlighting of inline code blocks__. It's built on top of the
+[Highlight][3] extension and can be enabled via `mkdocs.yml`:
 
 ``` yaml
 markdown_extensions:
-  - pymdownx.highlight:
-      anchor_linenums: true
   - pymdownx.inlinehilite
-  - pymdownx.snippets
+```
+
+See the section on [inline code blocks][12] for usage information.
+
+  [11]: https://facelessuser.github.io/pymdown-extensions/extensions/inlinehilite/
+  [12]: #highlighting-inline-code-blocks
+
+### Keys
+
+[:octicons-file-code-24: Source][13] · [:octicons-workflow-24: Extension][14]
+
+The [Keys][14] extension, which is part of [Python Markdown Extensions][5],
+allows for inserting __keyboard keys__, e.g. ++ctrl+alt+delete++ , and
+can be enabled via `mkdocs.yml`:
+
+``` yaml
+markdown_extensions:
+  - pymdownx.keys
+```
+
+  [13]: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/stylesheets/main/extensions/pymdownx/_keys.scss
+  [14]: https://facelessuser.github.io/pymdown-extensions/extensions/keys/
+
+### SuperFences
+
+The [SuperFences][15] extension, which is also part of [Python Markdown
+Extensions][5], allows for the __nesting of code blocks inside other blocks__,
+and is therefore strongly recommended:
+
+``` yaml
+markdown_extensions:
   - pymdownx.superfences
 ```
 
-The following sections discuss how to use different syntax highlighting features
-with [Pygments], the recommended highlighter, so they don't apply when using a
-JavaScript syntax highlighter.
+  [15]: https://facelessuser.github.io/pymdown-extensions/extensions/superfences/
 
-See additional configuration options:
+### Snippets
 
-- [Highlight]
-- [InlineHilite]
-- [SuperFences]
-- [Snippets]
-
-  [Highlight]: ../setup/extensions/python-markdown-extensions.md#highlight
-  [InlineHilite]: ../setup/extensions/python-markdown-extensions.md#inlinehilite
-  [SuperFences]: ../setup/extensions/python-markdown-extensions.md#superfences
-  [Snippets]: ../setup/extensions/python-markdown-extensions.md#snippets
-
-### Code annotations
-
-[:octicons-tag-24: 8.0.0][Code annotations support] ·
-:octicons-unlock-24: Feature flag
-
-Code annotations offer a comfortable and friendly way to attach arbitrary
-content to specific sections of code blocks by adding numeric markers in block
-and inline comments in the language of the code block. Add the following to
-`mkdocs.yml` to enable them globally:
+The [Snippets][16] extension, which is also part of [Python Markdown
+Extensions][5], allows to __insert content from other files__ or other, regular
+content, and can be enabled via `mkdocs.yml`:
 
 ``` yaml
-theme:
-  features:
-    - content.code.annotate # (1)!
+markdown_extensions:
+  - pymdownx.snippets
 ```
 
-1.  :man_raising_hand: I'm a code annotation! I can contain `code`, __formatted
-    text__, images, ... basically anything that can be written in Markdown.
-
-??? info "Enabling code annotations for a specific code block"
-
-    If you don't want to enable code annotations globally, because you don't
-    like the automatic inlining behavior, you can enable them for a specific
-    code block by using a slightly different syntax based on the
-    [Attribute Lists] extension:
-
-    ```` yaml
-    ``` { .yaml .annotate }
-    # Code block content
-    ```
-    ````
-
-    Note that the language shortcode which has to come first must now also be 
-    prefixed by a `.`.
-
-  [Code annotations support]: https://github.com/squidfunk/mkdocs-material/releases/tag/8.0.0
-  [Attribute Lists]: ../setup/extensions/python-markdown.md#attribute-lists
-
-#### Anchor links
-
-[:octicons-tag-24: 8.5.0][Anchor links support] ·
-:octicons-beaker-24: Experimental
-
-In order to be able to link to code annotations and share them more easily, and
-anchor link is automatically added to each annotation, which you can copy via
-right click or open in a new tab:
-
-``` yaml
-# (1)!
-```
-
-1.  If you ++cmd++ :material-plus::material-cursor-default-outline: me, I'm
-    rendered open in a new tab. You can also right-click me to __copy link
-    address__ to share me with others.
-
-  [Anchor links support]: https://github.com/squidfunk/mkdocs-material/releases/tag/8.5.0
+  [16]: https://facelessuser.github.io/pymdown-extensions/extensions/snippets/
 
 ## Usage
 
+This section discusses how to use different syntax highlighting features with
+[Pygments][1] – the default highlighter – so they don't apply when using
+a JavaScript syntax highlighter.
+
+### Specifying the language
+
 Code blocks must be enclosed with two separate lines containing three backticks.
-To add syntax highlighting to those blocks, add the language shortcode directly
-after the opening block. See the [list of available lexers] to find the
-shortcode for a given language:
+To add code highlighting to those blocks, add the language short name directly
+after the opening block. See the [list of available lexers][17] to find the
+short name for a given language.
 
-```` markdown title="Code block"
-``` py
+_Example_:
+
+```` markdown
+``` python
 import tensorflow as tf
 ```
 ````
 
-<div class="result" markdown>
+_Result_:
 
-``` py
+``` python
 import tensorflow as tf
 ```
 
-</div>
-
-  [list of available lexers]: https://pygments.org/docs/lexers/
-
-### Adding a title
-
-In order to provide additional context, a custom title can be added to a code
-block by using the `title="<custom title>"` option directly after the shortcode,
-e.g. to display the name of a file:
-
-```` markdown title="Code block with title"
-``` py title="bubble_sort.py"
-def bubble_sort(items):
-    for i in range(len(items)):
-        for j in range(len(items) - 1 - i):
-            if items[j] > items[j + 1]:
-                items[j], items[j + 1] = items[j + 1], items[j]
-```
-````
-
-<div class="result" markdown>
-
-``` py title="bubble_sort.py"
-def bubble_sort(items):
-    for i in range(len(items)):
-        for j in range(len(items) - 1 - i):
-            if items[j] > items[j + 1]:
-                items[j], items[j + 1] = items[j + 1], items[j]
-```
-
-</div>
+  [17]: https://pygments.org/docs/lexers/
 
 ### Adding annotations
 
-Code annotations can be placed anywhere in a code block where a comment for the
-language of the block can be placed, e.g. for JavaScript in `#!js // ...` and
-`#!js /* ... */`, for YAML in `#!yaml # ...`, etc.[^1]:
+[:octicons-file-code-24: Source][18] ·
+:octicons-beaker-24: Experimental ·
+[:octicons-heart-fill-24:{ .mdx-heart } Insiders only][18]{ .mdx-insiders }
 
-  [^1]:
-    Code annotations require syntax highlighting with [Pygments] – they're
-    currently not compatible with JavaScript syntax highlighters, or languages
-    that do not have comments in their grammar. However, we're actively working
-    on supporting alternate ways of defining code annotations, allowing to
-    always place code annotations at the end of lines.
+Annotations offer a comfortable and friendly way to attach explanations to
+arbitrary sections of code blocks by adding simple markers within block/inline
+comments that refer to items of a list following the code block, i.e. `(1)`,
+`(2)`, etc. Material for MkDocs detaches the list from the flow of the document,
+injects the content of each list item into a tooltip, and links each list marker
+to the corresponding tooltip.
 
-```` markdown title="Code block with annotation"
-``` yaml
-theme:
-  features:
-    - content.code.annotate # (1)
+In order to opt-in to annotation support, a slightly different syntax is
+required – just add the respective [language short code][17] and the `.annotate`
+class, after the three backticks.
+
+Note that annotations can be __placed anywhere__ in a code block where a comment
+for the language can be placed, which for JavaScript is `// (1)` and
+`/* (2) */`, for Yaml `# (3)`, etc.
+
+_Example_:
+
+```` markdown
+``` { .js .annotate }
+document$.subscribe(function() { // (1)
+  var tables = document.querySelectorAll(/* (2) */ "article table")
+  tables.forEach(function(table) {
+    new Tablesort(table)
+  })
+})
 ```
 
-1.  :man_raising_hand: I'm a code annotation! I can contain `code`, __formatted
-    text__, images, ... basically anything that can be written in Markdown.
+1. ...
+2. ...
 ````
 
-<div class="result" markdown>
+_Result_:
 
-``` yaml
-theme:
-  features:
-    - content.code.annotate # (1)
-```
+<figure markdown="1">
 
-1.  :man_raising_hand: I'm a code annotation! I can contain `code`, __formatted
-    text__, images, ... basically anything that can be written in Markdown.
+[![Annotations][19]][19]
 
-</div>
+  <figcaption markdown="1">
 
-#### Stripping comments
+A demo is worth a thousand words — check it out at
+[squidfunk.github.io/mkdocs-material-insiders][20]
 
-[:octicons-tag-24: 8.5.0][Stripping comments support] ·
-:octicons-beaker-24: Experimental
+  </figcaption>
+</figure>
 
-If you wish to strip the comment characters surrounding a code annotation,
-simply add an `!` after the closing parenthesis of the code annotation:
+_Annotations require syntax highlighting with [Pygments][24] – they're currently
+not compatible with other JavaScript-based syntax highlighters. Support may be
+added later on._
 
-```` markdown title="Code block with annotation, stripped"
-``` yaml
-# (1)!
-```
-
-1.  Look ma, less line noise!
-````
-
-<div class="result" markdown>
-
-``` yaml
-# (1)!
-```
-
-1.  Look ma, less line noise!
-
-</div>
-
-Note that this only allows for a single code annotation to be rendered per
-comment. If you want to add multiple code annotations, comments cannot be
-stripped for technical reasons.
-
-  [Stripping comments support]: https://github.com/squidfunk/mkdocs-material/releases/tag/8.5.0
+  [18]: ../insiders/index.md
+  [19]: ../assets/screenshots/annotations.png
+  [20]: https://squidfunk.github.io/mkdocs-material-insiders/reference/code-blocks/#adding-annotations
 
 ### Adding line numbers
 
 Line numbers can be added to a code block by using the `linenums="<start>"`
-option directly after the shortcode, whereas `<start>` represents the starting
+option directly after the short name, whereas `<start>` represents the starting
 line number. A code block can start from a line number other than `1`, which
-allows to split large code blocks for readability:
+allows splitting large code blocks for readability.
 
-```` markdown title="Code block with line numbers"
-``` py linenums="1"
+_Example_:
+
+```` markdown
+``` python linenums="1"
 def bubble_sort(items):
     for i in range(len(items)):
         for j in range(len(items) - 1 - i):
@@ -237,27 +284,26 @@ def bubble_sort(items):
 ```
 ````
 
-<div class="result" markdown>
+_Result_:
 
-``` py linenums="1"
+``` python linenums="1"
 def bubble_sort(items):
     for i in range(len(items)):
         for j in range(len(items) - 1 - i):
             if items[j] > items[j + 1]:
                 items[j], items[j + 1] = items[j + 1], items[j]
 ```
-
-</div>
 
 ### Highlighting specific lines
 
 Specific lines can be highlighted by passing the line numbers to the `hl_lines`
-argument placed right after the language shortcode. Note that line counts start
-at `1`, regardless of the starting line number specified as part of
-[`linenums`][Adding line numbers]:
+argument placed right after the language short name. Note that line counts start
+at `1`, regardless of the starting line number specified as part of `linenums`.
 
-```` markdown title="Code block with highlighted lines"
-``` py hl_lines="2 3"
+_Example_:
+
+```` markdown
+``` python hl_lines="2 3"
 def bubble_sort(items):
     for i in range(len(items)):
         for j in range(len(items) - 1 - i):
@@ -266,9 +312,9 @@ def bubble_sort(items):
 ```
 ````
 
-<div class="result" markdown>
+_Result_:
 
-``` py linenums="1" hl_lines="2 3"
+``` python hl_lines="2 3"
 def bubble_sort(items):
     for i in range(len(items)):
         for j in range(len(items) - 1 - i):
@@ -276,55 +322,81 @@ def bubble_sort(items):
                 items[j], items[j + 1] = items[j + 1], items[j]
 ```
 
-</div>
-
-  [Adding line numbers]: #adding-line-numbers
-
 ### Highlighting inline code blocks
 
-When [InlineHilite] is enabled, syntax highlighting can be applied to inline
-code blocks by prefixing them with a shebang, i.e. `#!`, directly followed by
-the corresponding [language shortcode][list of available lexers].
+When [InlineHilite][21] is enabled, inline code blocks can be highlighted by
+prefixing them with a shebang-like sequence, i.e. `#!`, directly followed by
+the [language short name][17].
 
-``` markdown title="Inline code block"
+_Example_:
+
+``` markdown
 The `#!python range()` function is used to generate a sequence of numbers.
 ```
 
-<div class="result" markdown>
+_Result_:
 
 The `#!python range()` function is used to generate a sequence of numbers.
 
-</div>
+  [21]: #inlinehilite
+
+### Adding keyboard keys
+
+When [Keys][22] is enabled, keyboard keys can be rendered with a simple syntax.
+Consult the [Python Markdown Extensions][16] documentation to learn about all
+available key codes.
+
+_Example_:
+
+``` markdown
+++ctrl+alt+del++
+```
+
+_Result_:
+
+++ctrl+alt+del++
+
+  [22]: #keys
 
 ### Embedding external files
 
-When [Snippets] is enabled, content from other files (including source files)
-can be embedded by using the [`--8<--` notation][Snippets notation] directly
-from within a code block:
+_Also known as transcludes or file transclusion in [MultiMarkdown][23]_.
 
-```` markdown title="Code block with external content"
-``` title=".browserslistrc"
+When [Snippets][24] is enabled, content from other files can be embedded, which
+is especially useful to reference and embed the contents of source files
+directly into your project documentation.
+
+_Example_:
+
+```` markdown
+```
 --8<--​ ".browserslistrc"
 ```
 ````
 
-<div class="result" markdown>
+_Result_:
 
-``` title=".browserslistrc"
+```
 last 4 years
 ```
 
-</div>
+Note that [Snippets][24] is not limited to code blocks, but can be used anywhere
+from a document to move repeating content to separate files, which is also
+explained in the [official documentation][16].
 
-  [Snippets notation]: https://facelessuser.github.io/pymdown-extensions/extensions/snippets/#snippets-notation
+  [23]: https://fletcher.github.io/MultiMarkdown-5/transclusion.html
+  [24]: #snippets
 
 ## Customization
 
 ### Custom syntax theme
 
-If [Pygments] is used, Material for MkDocs provides the [styles for code blocks]
-[colors], which are built with a custom and well-balanced palette that works
-equally well for both [color schemes]:
+[:octicons-file-code-24: Source][25] ·
+:octicons-mortar-board-24: Difficulty: _easy_
+
+If [Pygments][26] is used, Material for MkDocs provides the [styles for code
+blocks][25], which are built with a custom and well-balanced palette that works
+equally well for both [color schemes][27]:
 
 - :material-checkbox-blank-circle:{ style="color: var(--md-code-hl-number-color) " } `--md-code-hl-number-color`
 - :material-checkbox-blank-circle:{ style="color: var(--md-code-hl-special-color) " } `--md-code-hl-special-color`
@@ -346,110 +418,29 @@ Code block foreground, background and line highlight colors are defined via:
 - :material-checkbox-blank-circle:{ style="color: var(--md-code-hl-color) " } `--md-code-hl-color`
 
 Let's say you want to change the color of `#!js "strings"`. While there are
-several [types of string tokens], they use the same color. You can assign
-a new color by using an [additional style sheet]:
+several [types of string tokens][28], Material for MkDocs assigns a single color
+to most of them.
 
-=== ":octicons-file-code-16: `docs/stylesheets/extra.css`"
+Create an [additional stylesheet][6], and add:
 
-    ``` css
-    :root > * {
-      --md-code-hl-string-color: #0FF1CE;
-    }
-    ```
-
-=== ":octicons-file-code-16: `mkdocs.yml`"
-
-    ``` yaml
-    extra_css:
-      - stylesheets/extra.css
-    ```
-
-If you want to tweak a specific type of string, e.g. ``#!js `backticks` ``, you
-can lookup the specific CSS class name in the [syntax theme definition], and
-override it as part of your [additional style sheet]:
-
-=== ":octicons-file-code-16: `docs/stylesheets/extra.css`"
-
-    ``` css
-    .highlight .sb {
-      color: #0FF1CE;
-    }
-    ```
-
-=== ":octicons-file-code-16: `mkdocs.yml`"
-
-    ``` yaml
-    extra_css:
-      - stylesheets/extra.css
-    ```
-
-  [colors]: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/stylesheets/main/_colors.scss
-  [color schemes]: ../setup/changing-the-colors.md#color-scheme
-  [types of string tokens]: https://pygments.org/docs/tokens/#literals
-  [additional style sheet]: ../customization.md#additional-css
-  [syntax theme definition]: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/stylesheets/main/extensions/pymdownx/_highlight.scss
-
-### Annotation tooltip width
-
-If you have a lot of content hosted inside your code annotations, it can be a
-good idea to increase the width of the tooltip by adding the following as part
-of an [additional style sheet]:
-
-=== ":octicons-file-code-16: `docs/stylesheets/extra.css`"
-
-    ``` css
-    :root {
-      --md-tooltip-width: 600px;
-    }
-    ```
-
-=== ":octicons-file-code-16: `mkdocs.yml`"
-
-    ``` yaml
-    extra_css:
-      - stylesheets/extra.css
-    ```
-
-This will render annotations with a larger width:
-
-<div style="--md-tooltip-width: 600px;" markdown>
-
-``` yaml
-# (1)!
+``` css
+:root > * {
+  --md-code-hl-string-color: #0FF1CE;
+}
 ```
 
-1. Muuuuuuuuuuuuuuuch more space for content
+If you want to tweak a specific type of string, i.e. ``#!js `backticks` ``, you
+can lookup the specific class name in the [syntax theme definition][29], and
+override it as part of your additional stylesheet:
 
-</div>
+``` css
+.highlight .sb {
+  color: #0FF1CE;
+}
+```
 
-### Annotations with numbers
-
-Prior to [:octicons-tag-24: 8.1.0][code annotation markers], code annotations
-were rendered with markers showing the original number as used by the author.
-However, for technical reasons code annotation numbers restart each code block,
-which might lead to confusion. For this reason, code annotations now render as
-`+` signs which are rotated if they're open to denote that clicking them again
-will close them.
-
-If you wish to revert to the prior behavior and display code annotation numbers,
-you can add an [additional style sheet] and copy and paste the following CSS:
-
-=== ":octicons-file-code-16: `docs/stylesheets/extra.css`"
-
-    ``` css
-    .md-typeset .md-annotation__index > ::before {
-      content: attr(data-md-annotation-id);
-    }
-    .md-typeset :focus-within > .md-annotation__index > ::before {
-      transform: none;
-    }
-    ```
-
-=== ":octicons-file-code-16: `mkdocs.yml`"
-
-    ``` yaml
-    extra_css:
-      - stylesheets/extra.css
-    ```
-
-  [code annotation markers]: https://github.com/squidfunk/mkdocs-material/releases/tag/8.1.0
+  [25]: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/stylesheets/main/_colors.scss#
+  [26]: #use-pygments
+  [27]: ../setup/changing-the-colors.md#color-scheme
+  [28]: https://pygments.org/docs/tokens/#literals
+  [29]: https://github.com/squidfunk/mkdocs-material/blob/master/src/assets/stylesheets/main/extensions/markdown/_codehilite.scss

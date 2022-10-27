@@ -1,6 +1,5 @@
 ---
 template: overrides/main.html
-icon: material/gesture-tap-button
 ---
 
 # Buttons
@@ -11,75 +10,74 @@ useful for documents or landing pages with dedicated _call-to-actions_.
 
 ## Configuration
 
-This configuration allows to add attributes to all inline- and block-level
-elements with a simple syntax, turning any link into a button. Add the
-following lines to `mkdocs.yml`:
+### Attribute List
+
+The [Attribute List][1] extension, which is part of the standard Markdown
+library, allows to __add HTML attributes and CSS classes to Markdown elements__,
+and can be enabled via `mkdocs.yml`
 
 ``` yaml
 markdown_extensions:
   - attr_list
 ```
 
-See additional configuration options:
-
-- [Attribute Lists]
-
-  [Attribute Lists]: ../setup/extensions/python-markdown.md#attribute-lists
+  [1]: https://python-markdown.github.io/extensions/attr_list/
 
 ## Usage
 
 ### Adding buttons
 
-In order to render a link as a button, suffix it with curly braces and add the
-`.md-button` class selector to it. The button will receive the selected
-[primary color] and [accent color] if active.
+When the [Attribute List][2] extension is enabled, any clickable element can be
+converted into a button by adding the `.md-button` CSS class, which will receive
+the selected [primary color][3].
 
-``` markdown title="Button"
-[Subscribe to our newsletter](#){ .md-button }
+_Example_:
+
+``` markdown
+[Subscribe to our mailing list](#){ .md-button }
 ```
 
-<div class="result" markdown>
+_Result_:
 
-[Subscribe to our newsletter][Demo]{ .md-button }
+[Subscribe to our mailing list][4]{ .md-button }
 
-</div>
-
-  [primary color]: ../setup/changing-the-colors.md#primary-color
-  [accent color]: ../setup/changing-the-colors.md#accent-color 
-  [Demo]: javascript:alert$.next("Demo")
+  [2]: #attribute-list
+  [3]: ../setup/changing-the-colors.md#primary-color
+  [4]: javascript:alert$.next("Done!")
 
 ### Adding primary buttons
 
-If you want to display a filled, primary button (like on the [landing page]
-of Material for MkDocs), add both, the `.md-button` and `.md-button--primary`
-CSS class selectors.
+If you want to display a filled, primary button (like on the [landing page][5]
+of Material for MkDocs), add both the `.md-button` and `.md-button--primary`
+CSS classes.
 
-``` markdown title="Button, primary"
-[Subscribe to our newsletter](#){ .md-button .md-button--primary }
+_Example_:
+
+``` markdown
+[Subscribe to our mailing list](#){ .md-button .md-button--primary }
 ```
 
-<div class="result" markdown>
+_Result_:
 
-[Subscribe to our newsletter][Demo]{ .md-button .md-button--primary }
+[Subscribe to our mailing list][4]{ .md-button .md-button--primary }
 
-</div>
-
-  [landing page]: ../index.md
+  [5]: ../index.md
 
 ### Adding icon buttons
 
-Of course, icons can be added to all types of buttons by using the [icon syntax]
-together with any valid icon shortcode, which can be easily found with a few keystrokes through our [icon search].
+Of course, icons can be added to both types of buttons by using the [regular
+icon syntax][6] and referencing a valid path to [any icon bundled with the
+theme][7].
 
-``` markdown title="Button with icon"
-[Send :fontawesome-solid-paper-plane:](#){ .md-button }
+_Example_:
+
+``` markdown
+[Submit :fontawesome-solid-paper-plane:](#){ .md-button .md-button--primary }
 ```
 
-<div class="result" markdown>
+_Result_:
 
-[Send :fontawesome-solid-paper-plane:][Demo]{ .md-button }
+[Submit :fontawesome-solid-paper-plane:][4]{ .md-button .md-button--primary }
 
-</div>
-
-  [icon syntax]: icons-emojis.md#using-icons
-  [icon search]: icons-emojis.md#search
+  [6]: icons-emojis.md#using-icons
+  [7]: icons-emojis.md#search
