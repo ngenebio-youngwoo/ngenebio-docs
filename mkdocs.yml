@@ -76,7 +76,7 @@ theme:
   logo: assets/images/neos-brands.svg
 
 plugins:
-#  - extra-sass
+  - extra-sass
   - search
   - redirects:
       redirect_maps:

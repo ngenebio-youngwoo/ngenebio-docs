@@ -65,6 +65,7 @@ jobs:
             "mkdocs-redirects>=1.0" \
             "mkdocs-extra-sass-plugin" \
             "mkdocs-with-pdf" \
+            "livereload" \
             "pillow<10"
       
       - name: Install Insiders build
