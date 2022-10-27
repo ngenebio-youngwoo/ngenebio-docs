@@ -63,6 +63,8 @@ jobs:
             "mkdocs-minify-plugin>=0.3" \
             "mkdocs-rss-plugin>=1.1" \
             "mkdocs-redirects>=1.0" \
+            "mkdocs-extra-sass-plugin" \
+            "mkdocs-with-pdf" \
             "pillow<10"
       
       - name: Install Insiders build
