@@ -113,6 +113,56 @@ MSK-IMPACT within tumor samples against the matched normal DNA using the program
 To determine a patient’s MSI status, F1CDx employs a fraction-based (FB) MSI algorithm to categorize a
 tumor specimen as MSI-High (MSI-H) or microsatellite stable (MSS).
 
+
+## 상동재조합결핍 (Homologous recombination deficiency, HRD)
+DNA의 손상이 왔을때 이를 복구하는 과정 중 하나인 
+상동 재조합 복구 과정(Homologous recombination repair)에서
+BRCA 유전자에 돌연변이가 생기는 등 제대로 상동재조합 과정에 필요한 단백질을 만들지 못하는 경우 
+돌연변이가 축적되고 이로 인해 암화가 진행되게 된다.
+
+상동재조합 과정이 고장난 (HRD) 암세포들이 DNA 나선의 절단 복구를 위해서
+상동재조합이 아닌 염기절제 복구 (Base excision repair)를 이용하는데
+이 과정을 막으면 정상세포는 영향없이 암세포만 선택적으로 죽일 수 있게 된다.
+
+PARPi (PARP 억제제)는 염기절제 복구 과정에 중요한 유전자인 PARP1이 만드는 PARP1 단백질을 저해하는 물질로
+이를 이용하면 정상세포는 영향없이 암세포만 선택적으로 죽일 수 있게 된다.
+
+!!! info "DNA 복구"
+    * DNA가 중합효소에 의해 복제될 때 생기는 오류를 고쳐주는 불일치복구(Missmatch Repair:MMR)
+    * 염기서열 하나가 잘못되었을 때 고치는 염기절단복구(Base excision Repair: BER)
+    * 뉴클레오티드 절단복구(Nuceloid Excision Repair:NER)
+    * 이중가닥절단복구(Double stand Break repair: DSBR)
+        * 상동재조합(homologous recombination :HR) HDR (Homolgy directed repair)
+        * 비상동말단연결(non-homologous end joining:NHEJ)
+
+!!! info "PARPi"
+    한국화이자는 20년 7월 gBRCA 변이 유방암 치료제인 '탈제나(탈라조파립)'의 시판허가를 획득
+    이전에 항암화학요법 치료 경험이 있는 생식선 유방암 감수성 유전자(gBRCA) 변이, 사람상피세포성장인자수용체 2(HER2) 음성인 국소 진행성 또는 전이성 유방암 성인 환자 치료에 단독요법으로 승인
+    아스트라제네카의 '린파자(올라파립)'와 다케다의 '제줄라(니라파립)'은 난소암으로 허가 
+
+### 마커 확장
+
+- 상동재조함결핍 증거는?
+    * BRCA mutation
+    * HRD (HR Deficient) genomic instability status (LOH, TAI, LST)
+    * EMSY amplification
+    * PTEN homozygous loss
+
+- 유전자 확대 
+    * BRCA1/2와 함께 HRD에 관여하는 유전자로 확대 
+
+- 마커 종류 확대
+    * Mutation에서 methylation, amplification 등으로 확대
+
+- Score기반
+    * Myriad는 MyChoice HRD라는 제품을 통해 genomic instability에 관여하는
+    * LOH, TAI, LST를 종합적으로 고려한 HRD Score로 확대
+    * GSK의 Zejula의 동반진단으로 MyChoice HRD 사용하는 것으로 FDA에 제출
+    * Myriad Submits MyChoice HRD as CDx for GSK's Zejula (2019,4)
+
+### 소피아제네틱스
+HRD Solution: collaborating with AstraZeneca, aiming to expand access to in-house HRD testing across European laboratories and institutions
+
 ## 참고 문헌
 
 * 소피아 DDM을 이용한 논문 [Tumor BRCA testing in ovarian cancer and EQA scheme: our experience of a critical evaluation][1]

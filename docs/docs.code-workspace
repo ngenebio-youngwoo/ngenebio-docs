@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../../.Trash/pdf_event_hook"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}

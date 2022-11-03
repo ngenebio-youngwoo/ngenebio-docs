@@ -78,6 +78,7 @@ theme:
 plugins:
   - extra-sass
   - search
+  - git-authors
   - redirects:
       redirect_maps:
         changelog/insiders.md: insiders/changelog.md
