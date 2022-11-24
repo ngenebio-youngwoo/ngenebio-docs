@@ -3,6 +3,9 @@ template: overrides/main.html
 title: Getting started
 ---
 
+작성 테스트
+1. 2022-11-24 16:11
+
 # 정밀의료
 :material-dna: 유전체 기반의 정밀의학이 적시에 제공되기 위해서 분자 진단 검사실은 
 증가하는 유전자 검사를 최신 과학적 근거, 약물 승인 및 치료 지침을
