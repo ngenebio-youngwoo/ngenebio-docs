@@ -6,6 +6,8 @@ title: Getting started
 작성 테스트 
   * 2022-11-24 16:11
   * 2022-11-25 10:33
+  * 2022-11-25 10:42
+  * SOPHiA DDM™ for Solid Tumors
 
 # 정밀의료
 :material-dna: 유전체 기반의 정밀의학이 적시에 제공되기 위해서 분자 진단 검사실은 
