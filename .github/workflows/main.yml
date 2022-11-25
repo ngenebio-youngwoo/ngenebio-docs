@@ -1,4 +1,4 @@
-name: documentation
+name: NgeneBio Docs - deploy mkdocs
 on:
   push:
     branches:
