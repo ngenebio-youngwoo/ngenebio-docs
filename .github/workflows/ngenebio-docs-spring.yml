@@ -46,7 +46,8 @@ jobs:
             "mkdocs-with-pdf" \
             "livereload" \
             "pillow<10" \
-            "mkdocs-git-authors-plugin"
+            "mkdocs-git-authors-plugin" \
+            "mkdocs-material"
 
       - name: Build Mkdocs
         run: mkdocs build
